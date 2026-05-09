@@ -2,7 +2,6 @@
 
 A production-ready, secure, and gas-optimized smart contract gateway designed for Web3 games. It handles on-chain order payments using both **Native Tokens** (ETH/BNB/MATIC) and **Whitelisted ERC20** tokens with a backend-signed verification system.
 
----
 
 ## ✨ Key Features
 
@@ -14,7 +13,6 @@ A production-ready, secure, and gas-optimized smart contract gateway designed fo
     -   **Replay Protection**: Includes `chainId` in the signature hash to prevent cross-chain replay attacks.
 -   **Direct Settlement**: Funds are automatically routed to a cold `treasury` wallet, minimizing contract-held funds.
 
----
 
 ## 🛠 Technical Architecture
 
@@ -34,7 +32,6 @@ sequenceDiagram
     Contract-->>Player: Emit OrderPaid Event
 ```
 
----
 
 ## 🚀 Smart Contract API
 
@@ -48,7 +45,6 @@ sequenceDiagram
 - `setSubmitter`: Update the authorized backend signer address.
 - `rescueToken`: Admin emergency recovery of accidentally sent tokens.
 
----
 
 ## 🎮 Unity Integration (C#)
 
@@ -81,7 +77,7 @@ public async Task ExecutePayment(string orderId, string payId, string token, str
     Debug.Log($"Payment Hash: {receipt.TransactionHash}");
 }
 ```
----
+
 ## 🛠 Backend Integration (Node.js)
 
 To ensure secure payments, the backend `submitter` must sign the order data. Below is the implementation using `ethers.js`:
@@ -95,14 +91,14 @@ const signature = await wallet.signMessage(ethers.getBytes(messageHash));
 ```
 *Full signing script available in `/server/sign.js`.*
 
----
+
 ## 🛡 Security Audit Highlights
 
 - **SafeERC20**: Uses OpenZeppelin's `SafeERC20` to handle tokens that don't return booleans (e.g., USDT on some chains).
 - **Access Control**: Critical functions are protected by `onlyOwner`.
 - **Integrity**: `keccak256(abi.encodePacked(...))` ensures that any tampering with the `amount` or `orderId` in the frontend will result in a signature mismatch.
 
----
+
 
 ## 📦 Installation & Setup
 
